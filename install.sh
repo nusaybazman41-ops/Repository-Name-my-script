@@ -1,4 +1,4 @@
-show_menu() {
+ishow_menu() {
     clear
 
     echo -e "${RED}╔══════════════════════════════════════════════════════════╗${NC}"
@@ -48,8 +48,7 @@ EOF
         3) configure_tcp ;;
         4) clean_vps ;;
         5) exit 0 ;;
-        *) *) echo -e "${RED}❌ Invalid Choice! Please select 1-5.${NC}"; sleep 2; show_menu ;;
-    esac
+        *) *) echo -e "${RED}❌ Invalid Choice! Please select 1-5.${NC}";fah
 }
 
 # STEP 1: CONFIGURE STORAGE & DOWNLOAD CLOUD ARCHITECTURE
