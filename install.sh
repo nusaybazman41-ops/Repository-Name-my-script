@@ -1,8 +1,8 @@
-ishow_menu() {
+show_menu() {
     clear
 
     echo -e "${RED}╔══════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${WHITE}                 🔥 ITACHI VPS DASHBOARD 🔥power by DXD              ${NC}"
+    echo -e "${WHITE}                 🔥 ITACHI VPS DASHBOARD 🔥              ${NC}"
     echo -e "${RED}╚══════════════════════════════════════════════════════════╝${NC}"
 
     echo -e "${BLUE}"
@@ -18,7 +18,7 @@ cat << "EOF"
 EOF
 
     echo -e "${CYAN}════════════════════════════════════════════════════════════${NC}"
-    echo -e "${WHITE}                  ITACHI LABS VPS SYSTEM    power by DXD             ${NC}"
+    echo -e "${WHITE}                  ITACHI LABS VPS SYSTEM                 ${NC}"
     echo -e "${CYAN}════════════════════════════════════════════════════════════${NC}"
 
     echo ""
@@ -48,15 +48,15 @@ EOF
         3) configure_tcp ;;
         4) clean_vps ;;
         5) exit 0 ;;
-        *) *) echo -e "${RED}❌ Invalid Choice! Please select 1-5.${NC}";fah
+        *) echo -e "${RED}❌ Invalid Choice!${NC}"; sleep 2; show_menu ;;
+   esac
 }
-
 # STEP 1: CONFIGURE STORAGE & DOWNLOAD CLOUD ARCHITECTURE
 create_vps() {
     clear
     echo -e "${RED}==========================================================${NC}"
     echo -e "${WHITE}⚙️  CONFIGURE YOUR VIRTUAL MACHINE SPECIFICATIONS${NC}"
-    echo -e "${RED}==========================================================${NC}"
+    echo -e "${RED}=========================================================${NC}"
     echo ""
     
     echo -ne "${BLUE}🔹 Enter RAM Size in GB (e.g., 4, 8, 16, 32): ${NC}"
@@ -77,7 +77,7 @@ create_vps() {
     TCP_GUEST_PORT=22
 
     echo ""
-    echo -e "${YELLOW}⏳ Background core dependencies install ho rahi hain... Please wait.${NC}"
+esaesa -e "${YELLOW}⏳ Background core dependencies install ho rahi hain... Please wait.${NC}"
     echo ""
     
     $SUDO_CMD apt-get update -y > /dev/null 2>&1
