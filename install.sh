@@ -1,51 +1,52 @@
-#!/bin/bash
+{variant="document" id="47291"}
+show_menu() {
+    clear
 
-if [ "$EUID" -ne 0 ]; then
-  echo "Please run as root"
-  exit 1
-fi
+    echo -e "${BLUE}╔══════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${WHITE}                 🔥 ITACHI VPS DASHBOARD 🔥              ${NC}"
+    echo -e "${BLUE}╚══════════════════════════════════════════════════════════╝${NC}"
 
-clear
+    echo -e "${RED}"
+    cat << "EOF"
 
-BLUE='\033[1;34m'
-CYAN='\033[1;36m'
-GREEN='\033[1;32m'
-NC='\033[0m'
-
-echo -e "${BLUE}"
-cat << "EOF"
-
-███╗   ██╗███████╗██████╗ ██╗   ██╗██╗      █████╗
-████╗  ██║██╔════╝██╔══██╗██║   ██║██║     ██╔══██╗
-██╔██╗ ██║█████╗  ██████╔╝██║   ██║██║     ███████║
-██║╚██╗██║██╔══╝  ██╔══██╗██║   ██║██║     ██╔══██║
-██║ ╚████║███████╗██████╔╝╚██████╔╝███████╗██║  ██║
-╚═╝  ╚═══╝╚══════╝╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
+██╗████████╗ █████╗  ██████╗██╗  ██╗██╗
+██║╚══██╔══╝██╔══██╗██╔════╝██║  ██║██║
+██║   ██║   ███████║██║     ███████║██║
+██║   ██║   ██╔══██║██║     ██╔══██║██║
+██║   ██║   ██║  ██║╚██████╗██║  ██║██║
+╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝
 
 EOF
 
-echo -e "${CYAN}NEBULA VPS INSTALLER${NC}"
-echo ""
-echo "1) Pterodactyl Panel"
-echo "2) Blueprint"
-echo "3) Docker"
-echo "4) Nginx"
-echo "5) Node.js"
-echo "6) Python3"
-echo "7) KVM"
-echo "0) Exit"
-echo ""
+    echo -e "${CYAN}════════════════════════════════════════════════════════════${NC}"
+    echo -e "${WHITE}                  ITACHI LABS VPS SYSTEM                 ${NC}"
+    echo -e "${CYAN}════════════════════════════════════════════════════════════${NC}"
 
-read -p "Select Option: " option
+    echo ""
+    echo -e "${GREEN}👤 User     : $(whoami)${NC}"
+    echo -e "${GREEN}🖥 Hostname : $(hostname)${NC}"
+    echo -e "${GREEN}⚡ Status   : ONLINE${NC}"
+    echo ""
 
-case $option in
-1) bash scripts/pterodactyl.sh ;;
-2) bash scripts/blueprint.sh ;;
-3) bash scripts/docker.sh ;;
-4) bash scripts/nginx.sh ;;
-5) bash scripts/nodejs.sh ;;
-6) bash scripts/python.sh ;;
-7) bash scripts/kvm.sh ;;
-0) exit ;;
-*) echo "Invalid Option" ;;
-esac
+    echo -e "${YELLOW}👉 SELECT AN OPTION TO PROCEED FROM LIST:${NC}"
+    echo ""
+
+    echo -e "  ${CYAN}[1]${NC} Create & Boot New Ubuntu VPS Instance"
+    echo -e "  ${CYAN}[2]${NC} Restart Existing VPS Instance"
+    echo -e "  ${CYAN}[3]${NC} Modify TCP Port Forward Rules (Default: 2222)"
+    echo -e "  ${CYAN}[4]${NC} Remove/Clean VPS Cache Files"
+    echo -e "  ${CYAN}[5]${NC} Exit Dashboard"
+
+    echo ""
+    echo -e "${BLUE}════════════════════════════════════════════════════════════${NC}"
+    echo -ne "${WHITE}🔹 Enter Choice [1-5]: ${NC}"
+
+    read CHOICE
+
+    case $CHOICE in
+        1) create_vps ;;
+        2) restart_vps ;;
+        3) configure_tcp ;;
+        4) clean_vps ;;
+        5) exit 0 ;;
+        *) echo -e "${RED}❌ Invalid Choice! Please select 1-5.${NC}"; s
