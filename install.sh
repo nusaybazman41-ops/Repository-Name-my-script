@@ -78,7 +78,6 @@ EOF
 
     echo ""
     read -p "🔹 Enter Choice [1-5]: " CHOICE
-}
 # STEP 1: CONFIGURE STORAGE & DOWNLOAD CLOUD ARCHITECTURE
 create_vps() {
     clear
