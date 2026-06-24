@@ -1,11 +1,63 @@
+#!/bin/bash
+
+# Clear terminal for clean dashboard view
+clear
+
+# ==========================================
+# 🌟 PREMIUM COLOR CODES & FX
+# ==========================================
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+WHITE='\033[1;37m'
+NC='\033[0m'
+
+# FUNCTION: TYPING EFFECT ANIMATION
+type_effect() {
+    local text="$1"
+    local delay="$2"
+    for (( i=0; i<${#text}; i++ )); do
+        echo -n "${text:$i:1}"
+        sleep "$delay"
+    done
+    echo ""
+}
+
+# FUNCTION: LOADING BAR ANIMATION
+loading_bar() {
+    local title="$1"
+    echo -ne "${YELLOW}⏳ $title ${NC}[          ]"
+    sleep 0.3
+    echo -ne "\b\b\b\b\b\b\b\b\b\b\b[===       ]"
+    sleep 0.3
+    echo -ne "\b\b\b\b\b\b\b\b\b\b\b[======     ]"
+    sleep 0.3
+    echo -ne "\b\b\b\b\b\b\b\b\b\b\b[=========  ]"
+    sleep 0.3
+    echo -ne "\b\b\b\b\b\b\b\b\b\b\b[==========]"
+    echo -e " ${GREEN}DONE!${NC}"
+}
+
+# AUTOMATED ROOT/SUDO PRIVILEGE CHECK
+if [ "$(id -u)" -eq 0 ]; then
+    SUDO_CMD=""
+else
+    SUDO_CMD="sudo"
+fi
+
+# ==========================================
+# MAIN INTERACTIVE LIST MENU
+# ==========================================
 show_menu() {
     clear
 
-    echo -e "${RED}╔══════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${WHITE}                 🔥 ITACHI VPS DASHBOARD 🔥              ${NC}"
-    echo -e "${RED}╚══════════════════════════════════════════════════════════╝${NC}"
+    echo -e "${RED}════════════════════════════════════════════════════════════${NC}"
+    echo -e "${WHITE}🔥 ITACHI PREMIUM VPS DASHBOARD 🔥${NC}"
+    echo -e "${RED}════════════════════════════════════════════════════════════${NC}"
 
-    echo -e "${BLUE}"
 cat << "EOF"
 
 ██╗████████╗ █████╗  ██████╗██╗  ██╗██╗
@@ -17,46 +69,22 @@ cat << "EOF"
 
 EOF
 
-    echo -e "${CYAN}════════════════════════════════════════════════════════════${NC}"
-    echo -e "${WHITE}                  ITACHI LABS VPS SYSTEM                 ${NC}"
-    echo -e "${CYAN}════════════════════════════════════════════════════════════${NC}"
+    echo ""
+    echo " [1] Create & Boot New Ubuntu VPS Instance"
+    echo " [2] Restart Existing VPS Instance"
+    echo " [3] Modify TCP Port Forward Rules"
+    echo " [4] Remove/Clean VPS Cache Files"
+    echo " [5] Exit Dashboard"
 
     echo ""
-    echo -e "${GREEN}👤 User     : $(whoami)${NC}"
-    echo -e "${GREEN}🖥 Hostname : $(hostname)${NC}"
-    echo -e "${GREEN}⚡ Status   : ONLINE${NC}"
-    echo ""
-
-    echo -e "${YELLOW}👉 SELECT AN OPTION TO PROCEED FROM LIST:${NC}"
-    echo ""
-
-    echo -e "  ${CYAN}[1]${NC} Create & Boot New Ubuntu VPS Instance"
-    echo -e "  ${CYAN}[2]${NC} Restart Existing VPS Instance"
-    echo -e "  ${CYAN}[3]${NC} Modify TCP Port Forward Rules"
-    echo -e "  ${CYAN}[4]${NC} Remove/Clean VPS Cache Files"
-    echo -e "  ${CYAN}[5]${NC} Exit Dashboard"
-
-    echo ""
-    echo -e "${RED}════════════════════════════════════════════════════════════${NC}"
-    echo -ne "${WHITE}🔹 Enter Choice [1-5]: ${NC}"
-
-    read CHOICE
-
-    case $CHOICE in
-        1) create_vps ;;
-        2) restart_vps ;;
-        3) configure_tcp ;;
-        4) clean_vps ;;
-        5) exit 0 ;;
-        *) echo -e "${RED}❌ Invalid Choice!${NC}"; sleep 2; show_menu ;;
-   esac
+    read -p "🔹 Enter Choice [1-5]: " CHOICE
 }
 # STEP 1: CONFIGURE STORAGE & DOWNLOAD CLOUD ARCHITECTURE
 create_vps() {
     clear
     echo -e "${RED}==========================================================${NC}"
     echo -e "${WHITE}⚙️  CONFIGURE YOUR VIRTUAL MACHINE SPECIFICATIONS${NC}"
-    echo -e "${RED}=========================================================${NC}"
+    echo -e "${RED}==========================================================${NC}"
     echo ""
     
     echo -ne "${BLUE}🔹 Enter RAM Size in GB (e.g., 4, 8, 16, 32): ${NC}"
@@ -77,7 +105,7 @@ create_vps() {
     TCP_GUEST_PORT=22
 
     echo ""
-esaesa -e "${YELLOW}⏳ Background core dependencies install ho rahi hain... Please wait.${NC}"
+    echo -e "${YELLOW}⏳ Background core dependencies install ho rahi hain... Please wait.${NC}"
     echo ""
     
     $SUDO_CMD apt-get update -y > /dev/null 2>&1
@@ -207,7 +235,8 @@ boot_qemu() {
 # RESTART PIPELINE
 restart_vps() {
     if [ -f "/home/daytona/ubuntu22.qcow2" ] && [ -f "seed.img" ]; then
-        echo -e "${GREEN}🔄 Restarting existing server architecture...${NC}"
+        echo -e "${GREEN}🔄 Restarting existing
+        server architecture...${NC}"
         sleep 1
         boot_qemu
     else
@@ -228,3 +257,6 @@ clean_vps() {
     sleep 2
     show_menu
 }
+
+# EXECUTE TRIGGER
+show_menu
